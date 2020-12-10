@@ -222,6 +222,7 @@ class Controller extends BaseController
         for ($i=0; $i < count($products); $i++) { 
             $total += Product::find($products[$i])->price * $quantities[$i];
         }
+        //test nhanh
         
         $order = new Order();
         $order->name = $name;
