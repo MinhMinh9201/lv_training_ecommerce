@@ -1,6 +1,10 @@
 <?php
 
 use Illuminate\Http\Request;
+use \App\Http\Middleware\CorsPolicy;
+
+
+
 
 /*
 |--------------------------------------------------------------------------
@@ -13,6 +17,7 @@ use Illuminate\Http\Request;
 |
 */
 
+
 Route::group(['prefix' => 'collection'], function () {
     Route::group(['middleware' => 'auth:api'], function(){
         Route::post('/make', 'API\ProductCollectionController@make');
@@ -21,7 +26,7 @@ Route::group(['prefix' => 'collection'], function () {
     });
 });
 
-Route::group(['prefix' => 'products'], function () {
+Route::group(['prefix' => 'products', 'middleware' => ['cors']], function () {
     Route::get('/', 'API\ProductController@search');
     Route::get('get', 'API\ProductController@get');
     Route::get('gets', 'API\ProductController@gets');
@@ -32,15 +37,15 @@ Route::group(['prefix' => 'products'], function () {
     // Route::get('hotNew', 'API\ProductController@hotNew');
 });
 
-Route::group(['prefix' => 'categories'], function () {
+Route::group(['prefix' => 'categories', 'middleware' => ['cors']], function () {
     Route::get('/', 'Api\CategoryController@index');
     Route::get('/products', 'Api\CategoryController@products');
 });
 
-Route::group(['prefix' => 'groups'], function () {
+Route::group(['prefix' => 'groups', 'middleware' => ['cors']], function () {
     Route::get('/', 'Api\ProductGroupController@index');
 });
 
-Route::group(['prefix' => 'brands'], function () {
+Route::group(['prefix' => 'brands', 'middleware' => ['cors']], function () {
     Route::get('/', 'Api\BrandController@index');
 });
