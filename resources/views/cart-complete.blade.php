@@ -36,7 +36,7 @@
             </div>
             <div class="row row-pb-lg">
                 <div class="col-sm- offset-sm-1 text-center">
-                    <h2 class="mb-4">We have finished it for you, 
+                    <h2 class="mb-4">We have finished it for you,
                         please check your email to confirm the order!</h2>
                     <p>
                         <a href="{{url('/')}}"class="btn btn-primary btn-outline-primary">Home</a>
@@ -45,7 +45,6 @@
             </div>
         </div>
     </div>
-
 </div>
 @endsection
 @section('script')

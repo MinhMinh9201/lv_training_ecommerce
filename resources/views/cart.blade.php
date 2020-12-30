@@ -47,7 +47,7 @@
                             </div>
                             <div class="col-sm-4 text-center">
                                 <div class="total" id="cart-price">
-                                    
+
                                 </div>
                                 <p class="mt-4">
                                     <a href="{{url('cart-checkout.html')}}"class="btn btn-primary btn-outline-primary">Checkout</a>
@@ -64,7 +64,7 @@
                 </div>
             </div>
             <div class="row" id="cart-related">
-                
+
             </div>
         </div>
     </div>
@@ -106,7 +106,7 @@
             products.splice(index, 1);
             quantities.splice(index, 1);
         }
-        
+
         Cookies.set('cart-products', "[" + products + "]", { expires: 60});
         Cookies.set('cart-quantities', "[" + quantities + "]", { expires: 60});
         $('#span-cart').text(products.length);
@@ -128,7 +128,7 @@
     //     if (index > -1) {
     //         quantities[index] = quantity;
     //     }
-        
+
     //     Cookies.set('cart-products', "[" + products + "]", { expires: 60});
     //     Cookies.set('cart-quantities', "[" + quantities + "]", { expires: 60});
 

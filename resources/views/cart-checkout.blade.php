@@ -36,7 +36,7 @@
             </div>
             <div class="row row-pb-lg">
                 <div class="col-md-8" id="cart-body">
-                    <form action="{{url("cart-complete.html")}}"> 
+                    <form action="{{url("cart-complete.html")}}">
                         @csrf
                         <div class="form-group">
                           <label class="col-form-label">Your name:</label>
@@ -68,7 +68,6 @@
             </div>
         </div>
     </div>
-
 </div>
 @endsection
 @section('script')

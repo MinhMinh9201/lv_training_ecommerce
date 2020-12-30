@@ -2,7 +2,6 @@
 
 @section('content')
 <div>
-
   <aside id="colorlib-hero">
     <div class="flexslider">
       <ul class="slides">
@@ -63,7 +62,7 @@
           </div>
         @endif
       @endforeach
-  
+
       <div class="row">
         <div class="col-md-12 text-center">
           <p><a href="{{url('search.html')}}" class="btn btn-light btn-lg">Shop All Products</a></p>

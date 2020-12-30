@@ -140,7 +140,7 @@
                                 <a href="shop.html"class="btn btn-primary btn-outline-primary"><i class="icon-shopping-cart"></i> Go to cart</a>
                             </p>
                         </div>
-                    </div> 
+                    </div>
                 @endif
             </div>
         </div>

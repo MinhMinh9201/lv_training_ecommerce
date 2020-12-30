@@ -50,7 +50,7 @@
                     <div class="product-desc">
                         <h3>{{$product['title']}}</h3>
                         <p class="price">
-                            <span>${{$product['price']}}</span> 
+                            <span>${{$product['price']}}</span>
                             <span class="rate">
                                 <i class="icon-star-full"></i>
                                 <i class="icon-star-full"></i>
