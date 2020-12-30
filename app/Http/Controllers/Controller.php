@@ -31,7 +31,7 @@ class Controller extends BaseController
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
     public function __construct(){
-        $this->pageName = 'FASHION Interesting';
+        $this->pageName = 'FASHION SHOP';
         Category::fixTree();
         $this->categories = Category::get()->toTree();
         \View::share([
@@ -48,8 +48,8 @@ class Controller extends BaseController
             $products = Product::where('group_id', $col->id)->limit(Config('product.limit'))->get();
             array_push($collections, [$col->index=>$products]);
         }
-        
-        return response()->view('index', [
+
+        return response()->view('index2', [
             'banners'=>$banners,
             'groups'=>$groups,
             'collections'=>$collections,
@@ -67,7 +67,7 @@ class Controller extends BaseController
         ];
         $siblings = Category::where('parent_id', ">", "0")->get();
 
-        return View('collection', 
+        return View('collection2',
             [
                 'pageName'=> $this->pageName . ' - Search page',
                 'object'=>$object,
@@ -76,7 +76,7 @@ class Controller extends BaseController
                 'siblings' => $siblings
             ]);
     }
-    
+
     public function pages($slug){
 
         $category = Category::where('slug', $slug)->first();
@@ -108,9 +108,9 @@ class Controller extends BaseController
             case $productSlug:
                 return $this->viewProduct($product);
                 break;
-            
+
             default:
-                return view('error');
+                return view('error2');
                 break;
         }
     }
@@ -125,7 +125,7 @@ class Controller extends BaseController
         $other = ['title'=> 'Collection', 'children'=>ProductGroup::get()];
         $products = Product::where('brand_id', $id)
             ->paginate(Config('product.limit'));
-        return View('collection', 
+        return View('collection2',
             [
                 'pageName'=> $this->pageName . ' - ' . $brand->title,
                 'object'=>$brand,
@@ -141,7 +141,7 @@ class Controller extends BaseController
         $other = ['title'=> 'Brand', 'children'=>Brand::get()];
         $products = Product::where('group_id', $id)
             ->paginate(Config('product.limit'));
-        return View('collection', 
+        return View('collection2',
             [
                 'pageName'=> $this->pageName . ' - ' . $group->title,
                 'object'=>$group,
@@ -171,7 +171,7 @@ class Controller extends BaseController
         else
             $active = $parent->slug;
 
-        return View('collection', 
+        return View('collection2',
             [
                 'active' => $active,
                 'pageName'=> $this->pageName . ' - ' . $category->title,
@@ -184,7 +184,7 @@ class Controller extends BaseController
 
     private function viewProduct($product){
         $gallery = $product->gallery()->get();
-        return response()->view('detail', [
+        return response()->view('detailt2', [
             'pageName'=> $this->pageName . ' - ' . $product->title,
             'product'=>$product,
             'gallery'=>$gallery
@@ -192,11 +192,11 @@ class Controller extends BaseController
     }
 
     public function cart(){
-        return response()->view('cart', ['active'=>'cart']);;
+        return response()->view('cart2', ['active'=>'cart']);;
     }
 
     public function cartCheckout(){
-        return response()->view('cart-checkout', ['active'=>'cart']);;
+        return response()->view('cart-checkout2', ['active'=>'cart']);
     }
 
     public function cartComplete(Request $request){
@@ -219,11 +219,10 @@ class Controller extends BaseController
         }
 
         $total = 0;
-        for ($i=0; $i < count($products); $i++) { 
+        for ($i=0; $i < count($products); $i++) {
             $total += Product::find($products[$i])->price * $quantities[$i];
         }
-        //test nhanh
-        
+
         $order = new Order();
         $order->name = $name;
         $order->phone = $phone;
@@ -239,7 +238,7 @@ class Controller extends BaseController
 
         $id = $order->id;
         $details = [];
-        for ($i=0; $i < count($products) ; $i++) { 
+        for ($i=0; $i < count($products) ; $i++) {
             array_push($details, [
                 'order_id' => $id,
                 'product_id' => $products[$i],
@@ -251,13 +250,13 @@ class Controller extends BaseController
         try {
             Mail::to($user)->send(new MailBookingNotify($user));
             if (Mail::failures()) {
-                return view('error');
+                return view('error2');
             }
         } catch (\Throwable $th) {
-            return view('error');
+            return view('error2');
         }
 
-        
+
         return redirect('/cart.html/complete');
     }
 
@@ -283,7 +282,7 @@ class Controller extends BaseController
             return;
 
         $total = 0;
-        for ($i=0; $i < count($request->products); $i++) { 
+        for ($i=0; $i < count($request->products); $i++) {
             $total += Product::find($request->products[$i])->price * $request->quantities[$i];
         }
         return response()->view('contents.cart-price-total', [
