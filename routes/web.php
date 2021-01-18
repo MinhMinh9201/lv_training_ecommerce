@@ -11,6 +11,10 @@
 |
 */
 
+use App\Mail\MailBookingNotify;
+use App\User;
+use Illuminate\Support\Facades\Mail;
+
 Route::get('/', 'Controller@index');
 
 Route::group(['prefix' => '/cart.html'], function () {
@@ -65,5 +69,14 @@ Route::group(['prefix'=>'admin', 'middleware'=>'admin.login'], function(){
     //Route for ajax:
     Route::group(['prefix'=>'ajax', 'middleware'=>'admin.login'], function(){
         Route::resource('admin-users', 'Admin\UserController');
+    });
+});
+Route::get('/sendmail', function(){
+    Mail::to('mrthang1998142@gmail.com')->send(new MailBookingNotify("abc"));
+});
+
+Route::group(['middleware'=>'auth'], function () {
+    Route::get('/login', function ($id) {
+        return "Login";
     });
 });

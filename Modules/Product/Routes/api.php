@@ -44,6 +44,7 @@ Route::group(['prefix' => 'categories', 'middleware' => ['cors']], function () {
 
 Route::group(['prefix' => 'groups', 'middleware' => ['cors']], function () {
     Route::get('/', 'Api\ProductGroupController@index');
+    Route::get('/get', 'Api\ProductGroupController@show');
 });
 
 Route::group(['prefix' => 'brands', 'middleware' => ['cors']], function () {

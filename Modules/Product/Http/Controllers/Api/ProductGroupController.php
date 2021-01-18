@@ -55,9 +55,20 @@ class ProductGroupController extends Controller
      * @param int $id
      * @return Response
      */
-    public function show($id)
+    public function show(Request $request)
     {
-        return view('product::show');
+        try {
+            $model = ProductGroup::findOrFail($request->id);
+            return response()->json([
+                'status'=> 1,
+                'data'=> new ProductGroupResource($model)
+            ]);
+        } catch (\Throwable $th) {
+            return response()->json([
+                'status'=> 0,
+                'msg'=> $th->getMessage()
+            ]);
+        }
     }
 
     /**
