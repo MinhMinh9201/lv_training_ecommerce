@@ -31,7 +31,7 @@ Route::group(['prefix' => 'products', 'middleware' => ['cors']], function () {
     Route::get('get', 'API\ProductController@get');
     Route::get('gets', 'API\ProductController@gets');
     Route::get('suggest', 'API\ProductController@suggest');
-    
+
     // Route::get('byCategory', 'API\ProductController@byCategory');
     // Route::get('hotSelling', 'API\ProductController@hotSelling');
     // Route::get('hotNew', 'API\ProductController@hotNew');
@@ -49,4 +49,5 @@ Route::group(['prefix' => 'groups', 'middleware' => ['cors']], function () {
 
 Route::group(['prefix' => 'brands', 'middleware' => ['cors']], function () {
     Route::get('/', 'Api\BrandController@index');
+    Route::get('/get', 'Api\BrandController@show');
 });

@@ -55,9 +55,22 @@ class BrandController extends Controller
      * @param int $id
      * @return Response
      */
-    public function show($id)
+    public function show(Request $request)
     {
-        return view('product::show');
+        try {
+            //code...
+            $brand = Brand::findOrFail($request->id);
+            return response()->json([
+                'status'=>1,
+                'data'=> new BrandResource($brand)
+            ]);
+        } catch (\Throwable $th) {
+            //throw $th;
+            return response()->json([
+                'status'=>0,
+                'msg'=>$th->getMessage(),
+            ]);
+        }
     }
 
     /**
